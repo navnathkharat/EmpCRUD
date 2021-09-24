@@ -8,11 +8,11 @@ namespace EmpAPI.Repositories
 {
     public  interface IEmployee
     {
-        IEnumerable<Employee> GetEmployees();
-        Employee GetEmployeeById(int id);
-        void AddEmployee(Employee model);
-        void UpdateEmployee(Employee model);
-        void DeleteEmployee(int Id);
+        Task<IEnumerable<Employee>> GetEmployees();
+        Task<Employee> GetEmployeeById(int id);
+        Task<bool> AddEmployee(Employee model);
+        Task<bool> UpdateEmployee(Employee model);
+        Task<bool> DeleteEmployee(int Id);
         bool CheckValidUserKey(string reqkey);
     }
 }

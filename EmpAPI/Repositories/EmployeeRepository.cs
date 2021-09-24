@@ -1,5 +1,6 @@
 ﻿using EmpAPI.Context;
 using EmpAPI.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,48 +10,72 @@ namespace EmpAPI.Repositories
 {
     public class EmployeeRepository : IEmployee
     {
-        public void AddEmployee(Employee model)
+        public async Task<bool> AddEmployee(Employee model)
         {
-            using (var context = new EmpDbContext())
+            try
             {
-                context.Employees.Add(model);
-                context.SaveChanges();
+                using (var context = new EmpDbContext())
+                {
+                    context.Employees.Add(model);
+                    await context.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
 
-        public void DeleteEmployee(int Id)
+        public async Task<Employee> GetEmployeeById(int id)
         {
             using (var context = new EmpDbContext())
             {
-                var emp = context.Employees.FirstOrDefault(e => e.ID == Id);
-                context.Employees.Remove(emp);
-                context.SaveChanges();
+                return await context.Employees.FirstOrDefaultAsync(e => e.ID == id);
             }
         }
 
-        public Employee GetEmployeeById(int id)
+        public async Task<IEnumerable<Employee>> GetEmployees()
         {
             using (var context = new EmpDbContext())
             {
-                return context.Employees.FirstOrDefault(e => e.ID == id);
+                return await context.Employees.ToListAsync();
             }
         }
 
-        public IEnumerable<Employee> GetEmployees()
+        public async Task<bool> DeleteEmployee(int Id)
         {
-            using (var context = new EmpDbContext())
+            try
             {
-                return context.Employees.ToList();
+                using (var context = new EmpDbContext())
+                {
+                    var emp = context.Employees.FirstOrDefault(e => e.ID == Id);
+                    context.Employees.Remove(emp);
+                    await context.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
 
-        public void UpdateEmployee(Employee model)
+        public async Task<bool> UpdateEmployee(Employee model)
         {
-            using (var context = new EmpDbContext())
+            try
             {
-                model.ModifiedDate = DateTime.Now;
-                context.Entry(model).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                context.SaveChanges();
+                using (var context = new EmpDbContext())
+                {
+                    model.ModifiedDate = DateTime.Now;
+                    context.Entry(model).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    await context.SaveChangesAsync();
+                    return true;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
 
@@ -62,14 +87,13 @@ namespace EmpAPI.Repositories
                 "38236d8ec201df516d0f6472d516d72c",
                 "48236d8ec201df516d0f6472d516d72b"
             };
+
             if (userkeyList.Contains(reqkey))
             {
                 return true;
             }
-            else
-            {
-                return false;
-            }
+
+            return false;
         }
     }
 }

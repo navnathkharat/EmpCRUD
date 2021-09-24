@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Demo\\EmpAPI\\EmpAPI\\EmpAPI.csproj": {}
+    "E:\\Demo\\EmpAPI\\EmpCRUD\\EmpAPI\\EmpAPI.csproj": {}
   },
   "projects": {
-    "E:\\Demo\\EmpAPI\\EmpAPI\\EmpAPI.csproj": {
+    "E:\\Demo\\EmpAPI\\EmpCRUD\\EmpAPI\\EmpAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Demo\\EmpAPI\\EmpAPI\\EmpAPI.csproj",
+        "projectUniqueName": "E:\\Demo\\EmpAPI\\EmpCRUD\\EmpAPI\\EmpAPI.csproj",
         "projectName": "EmpAPI",
-        "projectPath": "E:\\Demo\\EmpAPI\\EmpAPI\\EmpAPI.csproj",
+        "projectPath": "E:\\Demo\\EmpAPI\\EmpCRUD\\EmpAPI\\EmpAPI.csproj",
         "packagesPath": "C:\\Users\\Navnath.Kharat\\.nuget\\packages\\",
-        "outputPath": "E:\\Demo\\EmpAPI\\EmpAPI\\obj\\",
+        "outputPath": "E:\\Demo\\EmpAPI\\EmpCRUD\\EmpAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Navnath.Kharat\\AppData\\Roaming\\NuGet\\NuGet.Config",

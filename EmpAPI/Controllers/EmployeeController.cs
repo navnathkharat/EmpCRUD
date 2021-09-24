@@ -16,44 +16,47 @@ namespace EmpAPI.Controllers
     [Authorize]
     public class EmployeeController : ControllerBase
     {
-        private IEmployee repository;
+        private readonly IEmployee repository;
         public EmployeeController()
         {
             repository = new EmployeeRepository();
         }
         // GET: api/<EmployeeController>
         [HttpGet]
-        public IEnumerable<Employee> Get()
+        public async Task<IEnumerable<Employee>> Get()
         {
-            return repository.GetEmployees();
+            return await repository.GetEmployees();
         }
 
         // GET api/<EmployeeController>/5
         [HttpGet("{id}")]
-        public Employee Get(int id)
+        public async Task<Employee> Get(int id)
         {
-            return repository.GetEmployeeById(id);
+            return await repository.GetEmployeeById(id);
         }
 
         // POST api/<EmployeeController>
         [HttpPost]
-        public void Post([FromBody] Employee employee)
+        public async Task<IActionResult> Post([FromBody] Employee employee)
         {
-            repository.AddEmployee(employee);
+            var result = await repository.AddEmployee(employee);
+            return Ok(result);
         }
 
         // PUT api/<EmployeeController>/5
         [HttpPut]
-        public void Put([FromBody] Employee employee)
+        public async Task<IActionResult> Put([FromBody] Employee employee)
         {
-            repository.UpdateEmployee(employee);
+            var result = await repository.UpdateEmployee(employee);
+            return Ok(result);
         }
 
         // DELETE api/<EmployeeController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            repository.DeleteEmployee(id);
+            var result = await repository.DeleteEmployee(id);
+            return Ok(result);
         }
     }
 }
